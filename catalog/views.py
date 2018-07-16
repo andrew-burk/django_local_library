@@ -10,6 +10,8 @@ def index(request):
     View function for home page of site.
     """
     # Generate counts of some of the main objects
+    num_genres=Genre.objects.all().count()
+    books_count=Book.objects.filter(title__icontains='s').count()
     num_books=Book.objects.all().count()
     num_instances=BookInstance.objects.all().count()
     # Available books (status = 'a')
@@ -20,5 +22,5 @@ def index(request):
     return render(
         request,
         'index.html',
-        context={'num_books':num_books,'num_instances':num_instances,'num_instances_available':num_instances_available,'num_authors':num_authors},
+        context={'num_books':num_books,'num_instances':num_instances,'num_instances_available':num_instances_available,'num_authors':num_authors,'num_genres':num_genres,'books_count':books_count},
     )
